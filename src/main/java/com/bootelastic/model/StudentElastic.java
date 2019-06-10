@@ -1,10 +1,6 @@
 package com.bootelastic.model;
 
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import com.bootelastic.adapters.AdapterTypeEnum;
-import org.springframework.data.repository.Repository;
 
 import lombok.Data;
 

@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootelastic.adapters.AdapterTypeEnum;
+import com.bootelastic.model.FileModel;
 import com.bootelastic.model.Student;
+import com.bootelastic.service.FileService;
 import com.bootelastic.service.StudentService;
-import com.mongodb.client.MongoDatabase;
 
 @CrossOrigin
 @Controller
@@ -20,9 +21,9 @@ public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
-
-	@Autowired
-	private MongoDatabase mongoDatabase;
+	
+	@Autowired 
+	private FileService fileService;
 	
 /*	@Autowired
 	private MongoConfig mongoConfig;*/
@@ -36,14 +37,34 @@ cumentsService;
 	 */
 	@PostMapping(value="/savestudent/{adapter}")
 	@ResponseBody
-	public void saveStudent(@PathVariable("adapter") AdapterTypeEnum adapter, @RequestBody Student student)
+	public Student saveStudent(@PathVariable("adapter") AdapterTypeEnum adapter, @RequestBody Student student)
 	{
-		studentService.save(student, adapter);
+		return studentService.save(student, adapter);
+	}
+	
+	@PostMapping(value="/saveFile/{adapter}")
+	@ResponseBody
+	public FileModel saveFile(@PathVariable("adapter") AdapterTypeEnum adapter, @RequestBody FileModel fileModel)
+	{
+		return fileService.save(fileModel, adapter);
+	}
+	
+	@GetMapping(value="/deleteallstudents/{adapter}")
+	@ResponseBody
+	public void deleteAllStudents(@PathVariable("adapter") AdapterTypeEnum adapter) {
+		studentService.deleteAll(adapter);
+	}
+	
+	@GetMapping(value="/deleteFile/{adapter}")
+	@ResponseBody
+	public void deleteFile(@PathVariable("adapter") AdapterTypeEnum adapter) {
+		fileService.deleteAll(adapter);
 	}
 
 /*	@GetMapping(value="/fetchallstudents")
 	@ResponseBody
-	public List<StudentElastic> fetchAllStudents() {
+	public List<StudentElast
+	ic> fetchAllStudents() {
 		return studentService.fetchAll();
 	}*/
 
@@ -54,11 +75,12 @@ cumentsService;
 		studentService.deleteById(studentid);
 	}*/
 
-	@GetMapping(value="/deleteallstudents/{adapter}")
-	@ResponseBody
-	public void deleteAllStudents(@PathVariable("adapter") AdapterTypeEnum adapter) {
-		studentService.deleteAll(adapter);
-	}
+	
+/*	
+	@GetMapping(value = "/fetchstudentsbyid/{id}")
+	public void getPetById(@PathVariable("id") String id) {
+	  studentService.fetchByID(id);
+	}*/
 	
 /*	@GetMapping(value="/testConfig")
 	public String testConfig() {

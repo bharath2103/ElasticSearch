@@ -1,9 +1,9 @@
 package com.bootelastic.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-import com.bootelastic.model.StudentElastic;
 import com.bootelastic.model.StudentMongo;
 
-public interface MongooRepository extends MongoRepository<StudentMongo, Long> {
+public interface MongoDatabaseRepository extends MongoRepository<StudentMongo, Long> {
 
 }

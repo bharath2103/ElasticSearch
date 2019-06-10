@@ -1,18 +1,18 @@
 package com.bootelastic.config;
 
-import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.authentication.UserCredentials;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoDatabase;
 
-import lombok.Data;
-
-@Configuration
-@Data
+@Configuration	
+@EnableMongoRepositories(basePackages = "com.bootelastic.repository")
 public class MongoConfig {
 	@Value("${mongodb.host}")
 	private String mongoHost;
@@ -22,20 +22,22 @@ public class MongoConfig {
 
 	@Value("${mongodb.database}")
 	private String mongoDbName;
-	
+
 	@Value("${mongodb.collection}")
 	private String mongoCollName;
-	
+
 	@Bean
-	public MongoDatabase mongoDatabase() {
-		MongoClientURI uri = new MongoClientURI(getHostName());
-		MongoClient mongo_client = new MongoClient(uri);
-		MongoDatabase db = mongo_client.getDatabase(mongoDbName);
-		return db;
+	public MongoDbFactory mongoDbFactory() throws Exception {
+
+		MongoClient mongoClient = new MongoClient(mongoHost, mongoPort);
+	//	UserCredentials userCredentials = new UserCredentials("", "");
+		return new SimpleMongoDbFactory(mongoClient,mongoDbName);
 	}
-	
-	public String getHostName(){
-		String client_url = "mongodb://" + mongoHost + ":" + mongoPort + "/" + mongoDbName;
-		return client_url;
+
+	@Bean
+	public MongoTemplate mongoTemplate() throws Exception {
+
+		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+		return mongoTemplate;
 	}
 }
