@@ -22,6 +22,9 @@ public class FileServiceImpl implements FileService {
 
 	@Autowired
 	private MongoFileRepository mongoFileRepository;
+	
+	@Autowired
+	private AlfrescoService AlfrescoService;
 
 	@Override
 	public FileModel save(FileModel fileModel, AdapterTypeEnum adapter) {
@@ -40,6 +43,8 @@ public class FileServiceImpl implements FileService {
 			stud =  this.getFileModel(mongoFileModel);
 			
 			elasticFileRepository.save(this.getElasticFileModel(stud, 2));
+			
+		//	AlfrescoService.createFileNFolder(stud);
 			
 		}
 		return stud;

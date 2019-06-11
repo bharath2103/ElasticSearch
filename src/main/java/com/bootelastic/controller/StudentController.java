@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootelastic.adapters.AdapterTypeEnum;
 import com.bootelastic.model.FileModel;
 import com.bootelastic.model.Student;
+import com.bootelastic.service.AlfrescoService;
 import com.bootelastic.service.FileService;
 import com.bootelastic.service.StudentService;
 
@@ -23,18 +24,11 @@ public class StudentController {
 	private StudentService studentService;
 	
 	@Autowired 
-	private FileService fileService;
+	private FileService fileService;		
 	
-/*	@Autowired
-	private MongoConfig mongoConfig;*/
-
-	/*	@Autowired 
-	private DocumentsService dopublic static void main(String[] args) {
-    	System.out.println(mongoConfig.mongoDatabase());
-//		System.out.println(mong);
-	}
-cumentsService;
-	 */
+	@Autowired
+	private AlfrescoService alfrescoService;
+	
 	@PostMapping(value="/savestudent/{adapter}")
 	@ResponseBody
 	public Student saveStudent(@PathVariable("adapter") AdapterTypeEnum adapter, @RequestBody Student student)
@@ -61,6 +55,21 @@ cumentsService;
 		fileService.deleteAll(adapter);
 	}
 
+	@GetMapping(value= "/fresco")
+	@ResponseBody
+	public void persistFileAlfresco() {
+		alfrescoService.createFileNFolder();
+	}
+	/*	@Autowired
+	private MongoConfig mongoConfig;*/
+	
+	/*	@Autowired 
+	private DocumentsService dopublic static void main(String[] args) {
+    	System.out.println(mongoConfig.mongoDatabase());
+//		System.out.println(mong);
+	}
+cumentsService;
+	 */
 /*	@GetMapping(value="/fetchallstudents")
 	@ResponseBody
 	public List<StudentElast
@@ -91,7 +100,8 @@ cumentsService;
 /*	@PostMapping(value="/updatestudent")
 	@ResponseBody
 	public void updateStudent(@RequestBody Student student) {
-		studentService.update(student);
+		studentServic		ContentStream contentStream = new ContentStreamImpl(name, BigInteger.valueOf(content.length), "text/plain", stream);
+e.update(student);
 	}*/
 	
 /*	@GetMapping(value="/sample/{adapter}")
@@ -104,7 +114,7 @@ cumentsService;
 	/*	@PostMapping(value="/saveDocuments")
 	public void saveDocuments(@RequestBody Documents documents)
 	{
-		documentsService.save(documents);
+		documentsService.sav@ResponseBodye(documents);
 	}
 
 	@PostMapping(value="/deleteDocuments")
@@ -123,13 +133,15 @@ cumentsService;
 	public void sampleGreet(@RequestBody DBFileStore dbFileStore)
 	{
 		System.out.println("Sample HMongoDatabaseello"+dbFileStore);
-	}*/
+	}*/		
 
 
-	/*	public static void main(String[] args)
+	/*	public static void m@ResponseBodyain(String[] args)
 	{
 		Student student = new Student();
-		student.setName("vinod");
+		student.setNam		ContentStream contentStream = new ContentStreamImpl(name, BigInteger.valueOf(content.length), "text/plain", stream);
+e("vinod");		ContentStream contentStream = new ContentStreamImpl(name, BigInteger.valueOf(content.length), "text/plain", stream);
+
 		student.setAge("20");
 		student.setCity("Coimbatore");
 		student.setCountry("india");
@@ -159,16 +171,18 @@ mongoDatabase
 	    
 	    studEs.getClass().getAnnotations();
 	    System.out.println(stud.toString());
-	    System.out.println(studEs.toString());
+	    System.out.print		ContentStream contentStream = new ContentStreamImpl(name, BigInteger.valueOf(content.length), "text/plain", stream);
+ln(studEs.toString());
 	}*/
 	
-/*    private static void addOneDocument(MongoCollection<Document> col) {
+/*    private static voi@ResponseBodyd addOneDocument(MongoCollection<Document> col) {
     	 
         // Sample document.
         Document emp1 = new Document();
         emp1.put("name", "yatin batra");
         emp1.put("age", "30");
-        emp1.put("city", "cbe");
+        emp1.put("city", 		ContentStream contentStream = new ContentStreamImpl(name, BigInteger.valueOf(content.length), "text/plain", stream);
+"cbe");
         emp1.put("country", "india");
         col.insertOne(emp1);
     }*/
@@ -176,7 +190,23 @@ mongoDatabase
 /*    public static void main(String[] args) {
     	int port_no = 27017;
         String host_name = "localhost", db_name = "bharath", db_coll_name = "student";
-        
+        // default factory implementation
+		SessionFactory factory = SessionFactoryImpl.newInstance();
+		Map<String,String> parameter = new HashMap<String, String>();
+
+		// user credential
+		parameter.put(SessionParameter.USER, "admin");
+		parameter.put(SessionParameter.PASSWORD, "admin");
+
+		// connection settings
+		//parameter.put(SessionParameter.ATOMPUB_URL, "http://127.0.0.1/alfresco/api/-default-/public/cmis/versions/1.1/atom");
+		parameter.put(SessionParameter.ATOMPUB_URL, "http://localhost:8080/alfresco/cmisatom");
+		parameter.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+
+		// create session
+		//Session session = factory.getRepositories(parameter).get(0).createSession();
+		List<Repository> repositories = factory.getRepositories(parameter);
+		Session session = repositories.get(0).createSession();
         String client_url = "mongodb://" + host_name + ":" + port_no + "/" + db_name;
         MongoClientURI uri = new MongoClientURI(client_url);
         
@@ -197,6 +227,27 @@ mongoDatabase
 //		System.out.println(mong);
 	}
 */
-	
-	
+/*	public static void main(String[] args){
+@ResponseBody
+		// default factory implementation
+		SessionFactory factory = SessionFactoryImpl.newInstance();
+		Map<String,String> parameter = new HashMap<String, String>();
+
+		// user credential
+		parameter.put(SessionParameter.USER, "admin");
+		parameter.put(SessionPasaveFile/MONGOrameter.PASSWORD, "admin");
+
+		// connection settings
+		//parameter.put(SessionParameter.ATOMPUB_URL, "http://127.0.0.1/alfresco/api/-default-/public/cmis/versions/1.1/atom");
+		parameter.put(SessionParameter.ATOMPUB_URL, "http://localhost:8080/alfresco/cmisatom");
+		parameter.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+
+		// create session
+		//Session session = factory.getRepositories(parameter).get(0).createSession();
+		List<Repository> repositories = factory.getRepositories(parameter);
+		Session session = repositories.get(0).createSession();
+		StudentController stud = new StudentController();
+		stud.persistFileAlfresco();
+	}*/
+
 }
