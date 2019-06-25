@@ -44,8 +44,6 @@ public class FileServiceImpl implements FileService {
 			
 			elasticFileRepository.save(this.getElasticFileModel(stud, 2));
 			
-		//	AlfrescoService.createFileNFolder(stud);
-			
 		}
 		return stud;
 	}
@@ -61,6 +59,7 @@ public class FileServiceImpl implements FileService {
 		}
 	}
 	
+	//---Model Converters -----//
 	private ElasticFileModel getElasticFileModel(FileModel src, Integer persistlevel){
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
 		if(persistlevel == 1) {
