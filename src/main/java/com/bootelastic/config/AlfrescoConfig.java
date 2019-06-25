@@ -36,12 +36,10 @@ public class AlfrescoConfig {
 		parameter.put(SessionParameter.PASSWORD, password);
 
 		// connection settings
-		//parameter.put(SessionParameter.ATOMPUB_URL, "http://127.0.0.1/alfresco/api/-default-/public/cmis/versions/1.1/atom");
 		parameter.put(SessionParameter.ATOMPUB_URL, atomPubUrl);
 		parameter.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
 
 		// create session
-		//Session session = factory.getRepositories(parameter).get(0).createSession();
 		List<Repository> repositories = factory.getRepositories(parameter);
 		return repositories.get(0).createSession();
 	}
