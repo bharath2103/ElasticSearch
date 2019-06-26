@@ -7,5 +7,7 @@ public interface AlfrescoService {
 	public String fetchDocument();
 	
 	public boolean checkDuplicates(String folder, String file);
+	
+	public void doesFolderExist(String folderName);
 
 }

@@ -12,7 +12,7 @@ import com.bootelastic.service.AlfrescoService;
 @CrossOrigin
 @Controller
 public class DmsController {
-	
+
 	@Autowired
 	private AlfrescoService alfrescoService;
 
@@ -21,17 +21,23 @@ public class DmsController {
 	public void persistFileAlfresco() {
 		alfrescoService.createFileNFolder();
 	}
-	
+
 	@GetMapping(value= "/fresco/getDocument")
 	@ResponseBody
 	public String fetchFileAlfresco() {
 		return alfrescoService.fetchDocument();
-	}
-	
+	}	
+
 	@GetMapping(value= "/fresco/checkDuplicates/{folder}/{file}")
 	@ResponseBody
 	public boolean checkDuplicates(@PathVariable("folder") String folder, @PathVariable("file") String file) {
 		return alfrescoService.checkDuplicates(folder, file);
 	}
+
+	@GetMapping(value = "/checkForDuplicate/{folderName}")
+	public void checkForDuplicates(@PathVariable("folderName")String folderName) {
+		alfrescoService.doesFolderExist(folderName); 
+
+	}
+
 }
- 
